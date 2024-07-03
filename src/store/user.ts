@@ -11,17 +11,14 @@ const userStorage = storage('user')
 export const useUserStore = defineStore('user', () => {
     // 类型可能是userinfo或者是null，给一个默认值null
     const userInfo = ref<UserInfo | null>(null)
-
-    const isLogin = computed(() => userInfo.value)
+    const isLogin = computed(() =>!!userInfo.value)
 
     const setUser = (user: UserInfo) => {
         userInfo.value = user
         userStorage.set(user.token) // 持久化保存token
-        console.log('isLogin',isLogin)
     };
 
     const verifyAuth = async () => {
-        console.log('userInfo.value', userInfo.value)
         // 本地保存了token但是拿不到userinfo的值，说明用户刷新了页面，但是用户登录了，需要重新获取一下信息
         if (!userInfo.value && userStorage.get()) {
             const res = await getUser()

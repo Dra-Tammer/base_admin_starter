@@ -38,6 +38,7 @@ import PageHeader from "@/layout/components/PageHeader.vue";
       height: 100%;
       background-color: #000;
       color: #fff;
+      width: 200px;
     }
 
     > .right {

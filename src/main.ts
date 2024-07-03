@@ -15,14 +15,14 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
 
-app.use(router)
+
 app.use(pinia)
 
 // 页面刷新时更新用户的信息
 const userStore = useUserStore()
 const {verifyAuth} = userStore
 await verifyAuth()
-
+app.use(router)
 app.use(ElementPlus)
 
 app.mount('#app')
