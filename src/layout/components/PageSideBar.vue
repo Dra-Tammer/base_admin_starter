@@ -16,7 +16,17 @@ const isCollapse = ref(false)
 </script>
 <template>
   <div>
-    <el-menu :default-active="defaultActive" router :collapse="isCollapse">
+    <div style="text-align: center; background-color: #000;">
+      <span class="cursor" @click="isCollapse = !isCollapse">
+        <el-icon v-if="isCollapse">
+          <expand></expand>
+        </el-icon>
+        <el-icon v-else>
+          <fold></fold>
+        </el-icon>
+      </span>
+    </div>
+    <el-menu :default-active="defaultActive" router :collapse="isCollapse" background-color="black" text-color="white">
       <template v-for="(item,index) in treeData" :key="item.path">
         <!--        item 有子目录且不少于一个，渲染-->
         <el-sub-menu :index="item.path" v-if="item.children && item.children.length > 0">
@@ -24,7 +34,7 @@ const isCollapse = ref(false)
             <el-icon v-if="item.meta.icon">
               <component :is="item.meta.icon"></component>
             </el-icon>
-            <span>{{ item.name }}</span>
+            <span class="routeName">{{ item.name }}</span>
           </template>
           <template v-for="(children, index) in item.children" :key="index">
             <el-menu-item :index="children.path">
@@ -32,7 +42,7 @@ const isCollapse = ref(false)
                 <!--                解决ts的报错，加上一个非空断言-->
                 <component :is="children!.meta!.icon"></component>
               </el-icon>
-              <span>{{ children.name }}</span>
+              <span style="font-size: small;">{{ children.name }}</span>
             </el-menu-item>
           </template>
         </el-sub-menu>
@@ -40,6 +50,9 @@ const isCollapse = ref(false)
     </el-menu>
   </div>
 </template>
-<style lang="css" scoped>
-
+<style lang="scss" scoped>
+.cursor {
+  color: #fff;
+  cursor: pointer;
+}
 </style>

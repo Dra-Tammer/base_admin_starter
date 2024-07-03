@@ -70,7 +70,7 @@ const doReset = () => {
 </script>
 <template>
   <div class="main_container">
-    <el-form label-width="88px" :rules="rules" :model="user" ref="formRef">
+    <el-form label-width="88px" :rules="rules" :model="user" ref="formRef" class="reg">
       <h2 class="title">用户注册</h2>
       <el-form-item label="用户名" prop="username">
         <el-input v-model="user.username" placeholder="请输入用户名" prefix-icon="user"></el-input>
@@ -98,5 +98,11 @@ const doReset = () => {
   text-align: center;
   margin-bottom: 20px;
   font-weight: bolder;
+}
+
+.reg {
+  width: 480px;
+  margin: 200px auto 0;
+  text-align: center;
 }
 </style>

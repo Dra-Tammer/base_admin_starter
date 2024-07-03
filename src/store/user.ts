@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import type {UserInfo} from "@/types";
 import {storage} from "@/utils/storage";
 import {getUser} from "@/api";
@@ -11,6 +11,9 @@ const userStorage = storage('user')
 export const useUserStore = defineStore('user', () => {
     // 类型可能是userinfo或者是null，给一个默认值null
     const userInfo = ref<UserInfo | null>(null)
+
+    const isLogin = computed(() => userInfo.value)
+
     const setUser = (user: userInfo) => {
         userInfo.value = user
         userStorage.set(user.token) // 持久化保存token
@@ -24,9 +27,17 @@ export const useUserStore = defineStore('user', () => {
             setUser(res.data.user)
         }
     }
+
+    const removeUser = () => {
+        userInfo.value = null
+        userStorage.remove()
+    }
+
     return {
         setUser,
         userInfo,
-        verifyAuth
+        verifyAuth,
+        removeUser,
+        isLogin
     }
 })
