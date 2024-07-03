@@ -1,8 +1,9 @@
 <script lang="ts" setup>
-import {ref} from "vue";
+import {ref, onMounted} from "vue";
 import type {Article, ArticleSearchParams} from "@/types";
 import {ElMessageBox} from 'element-plus'
-import {getArticles} from '@/api'
+import {getArticles, getTags} from '@/api'
+import {c} from "vite/dist/node/types.d-aGj9QkWt";
 
 
 interface PageDataInfo {
@@ -25,6 +26,12 @@ const fetchArticles = async (page: number, pageSize: number) => {
     'offset': page,
     'limit': pageSize
   };
+  if (filters.value.name != '') {
+    params['author'] = filters.value.name
+  }
+  if (selectValue.value != undefined) {
+    params['tag'] = selectValue.value
+  }
   try {
     const res = await getArticles(params)
     info.value.tableData = res.data.articles
@@ -33,8 +40,6 @@ const fetchArticles = async (page: number, pageSize: number) => {
     await ElMessageBox.alert(error.message)
   }
 }
-// setup执行时机在所有的生命周期函数之前
-fetchArticles(0, info.value.pageSize)
 
 const handleSizeChange = (val: number) => {
   info.value.pageSize = val
@@ -46,8 +51,46 @@ const handleCurrentChange = (val: number) => {
   fetchArticles(info.value.pageSize * (val - 1), info.value.pageSize)
 }
 
+const filters = ref({
+  name: ''
+})
+const selectValue = ref<string | undefined>()
+const tags = ref<string[]>([])
+const doSearch = async () => {
+  info.value.pageSize = 10
+  info.value.currentPage = 1
+  await fetchArticles(info.value.pageSize * (info.value.currentPage - 1), info.value.pageSize)
+}
+
+onMounted(async () => {
+  try {
+    const res = await getTags()
+    tags.value = res.data.tags
+  }catch (error) {
+
+  }
+})
+
+// setup执行时机在所有的生命周期函数之前
+fetchArticles(0, info.value.pageSize)
+
+
+
 </script>
 <template>
+  <div class="toolBar">
+    <el-form :inline="true" :model="filters">
+      <el-form-item>
+        <el-input v-model="filters.name" placeholder="请输入作者名称"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-select placeholder="请选择标签" style="width: 240px;" v-model="selectValue">
+          <el-option v-for="(option,index) in tags" :key="index" :label="option" :value="option"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-button icon="search" type="primary" @click="doSearch">搜索</el-button>
+    </el-form>
+  </div>
   <div class="mainContainer">
     <el-table :data="info.tableData" style="width: 100%;" border>
       <el-table-column prop="slug" label="ID" width="240" :show-overflow-tooltip="true"></el-table-column>

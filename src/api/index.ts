@@ -51,3 +51,8 @@ export const getArticles = (
         params: params
     })
 }
+
+export const getTags = (): Promise<{ data: { tags: string[] } }> => request({
+    method: 'GET',
+    url: '/tags'
+})
