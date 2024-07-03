@@ -21,7 +21,7 @@ const commands = ({
 })
 
 function handleCommand(command: string) {
-  commands[command] && commands[command]()
+  (commands as any)[command] && (commands as any)[command]()
 }
 </script>
 <template>

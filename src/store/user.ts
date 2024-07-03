@@ -14,7 +14,7 @@ export const useUserStore = defineStore('user', () => {
 
     const isLogin = computed(() => userInfo.value)
 
-    const setUser = (user: userInfo) => {
+    const setUser = (user: UserInfo) => {
         userInfo.value = user
         userStorage.set(user.token) // 持久化保存token
     };
