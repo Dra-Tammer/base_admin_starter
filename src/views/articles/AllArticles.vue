@@ -36,6 +36,8 @@ const fetchArticles = async (page: number, pageSize: number) => {
     const res = await getArticles(params)
     info.value.tableData = res.data.articles
     info.value.total = res.data.articlesCount
+    selectValue.value = ''
+    filters.value.name = ''
   } catch (error) {
     await ElMessageBox.alert(error.message)
   }
@@ -66,14 +68,13 @@ onMounted(async () => {
   try {
     const res = await getTags()
     tags.value = res.data.tags
-  }catch (error) {
+  } catch (error) {
 
   }
 })
 
 // setup执行时机在所有的生命周期函数之前
 fetchArticles(0, info.value.pageSize)
-
 
 
 </script>
