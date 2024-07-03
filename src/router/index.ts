@@ -37,6 +37,25 @@ const routes = [
                         component: () => import("@/views/articles/MyArticles.vue")
                     }
                 ]
+            },
+            {
+                path: 'personal',
+                name: '个人设置',
+                meta: {
+                    requiresAuth: true,
+                    icon: 'user'
+                },
+                children: [
+                    {
+                        path: '/personal/me',
+                        name: '个人信息',
+                        meta: {
+                            requiresAuth: true,
+                            icon: 'user'
+                        },
+                        component: () => import('@/views/personal/index.vue')
+                    }
+                ]
             }
         ]
     },
@@ -44,7 +63,8 @@ const routes = [
         path: '/register',
         name: 'Register',
         component: () => import("@/views/register/index.vue")
-    }
+    },
+
 ]
 
 const router = createRouter({

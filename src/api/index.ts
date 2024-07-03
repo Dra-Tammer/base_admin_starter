@@ -17,3 +17,11 @@ export const getUser = (): Promise<{ data: { user: UserInfo } }> => request({
     method: 'GET',
     url: '/user'
 })
+
+export const updateUser = (params: {
+    user: UserInfo
+}): Promise<{ data: { user: UserInfo } }> => request({
+    method: 'PUT',
+    url: '/user',
+    data: params
+})

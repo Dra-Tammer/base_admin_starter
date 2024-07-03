@@ -11,7 +11,7 @@ const {removeUser} = userStore
 const router = useRouter()
 const commands = ({
   toPersonal: () => {
-    alert('topersonal')
+    router.push('/personal/me')
   },
   toLogout: () => {
     alert('tologout')
@@ -20,7 +20,7 @@ const commands = ({
   }
 })
 
-function handleCommand(command) {
+function handleCommand(command: string) {
   commands[command] && commands[command]()
 }
 </script>
