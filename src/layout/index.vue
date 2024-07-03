@@ -1,9 +1,12 @@
 <script lang="ts" setup="">
+import PageSideBar from "@/layout/components/PageSideBar.vue";
+
 
 </script>
 <template>
-  <router-link to="/article/all">全部文章</router-link>
-  <router-link to="/article/me">我的文章</router-link>
+  <div>
+    <PageSideBar></PageSideBar>
+  </div>
   <div>
     <router-view></router-view>
   </div>
