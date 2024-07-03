@@ -85,6 +85,9 @@ const doReset = () => {
         <el-button type="primary" @click="doReg">注册</el-button>
         <el-button type="info" @click="doReset">重置</el-button>
       </el-form-item>
+      <div>
+        <router-link to="/login">已有帐号？去登陆</router-link>
+      </div>
     </el-form>
   </div>
 </template>

@@ -1,5 +1,6 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
 import Layout from '@/layout/index.vue'
+import {useUserStore} from "@/store/user";
 
 const routes = [
     {
@@ -64,11 +65,26 @@ const routes = [
         name: 'Register',
         component: () => import("@/views/register/index.vue")
     },
+    {
+        path: '/login',
+        name: 'Login',
+        component: () => import("@/views/login/index.vue")
+    },
 
 ]
 
 const router = createRouter({
     history: createWebHashHistory(),
     routes
+})
+
+router.beforeEach((to) => {
+    const useStore = useUserStore();
+    const {isLogin} = useStore;
+    if (to.meta.requiresAuth && !isLogin) {
+        return {
+            name: 'Login'
+        }
+    }
 })
 export default router
