@@ -14,9 +14,8 @@ const commands = ({
     router.push('/personal/me')
   },
   toLogout: () => {
-    alert('tologout')
     removeUser()
-    router.push('/register')
+    router.push('/login')
   }
 })
 

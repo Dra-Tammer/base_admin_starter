@@ -38,7 +38,7 @@ const rules = computed(() => {
   }
 })
 const formRef = ref()
-const openErrorMessage = (message) => {
+const openErrorMessage = (message: string) => {
   ElMessage.error(message)
 }
 

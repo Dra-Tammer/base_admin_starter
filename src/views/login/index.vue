@@ -13,7 +13,7 @@ const user = reactive<User>({
   email: '',
   password: ''
 })
-const openErrorMessage = (message) => {
+const openErrorMessage = (message: string) => {
   ElMessage.error(message)
 }
 const formRef = ref()
