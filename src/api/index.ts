@@ -1,7 +1,9 @@
 import request from '@/utils/request'
 import type {
     User,
-    UserInfo
+    UserInfo,
+    Article,
+    ArticleSearchParams
 } from "@/types";
 
 export const register = (params: {
@@ -33,3 +35,19 @@ export const login = (params: {
     url: '/users/login',
     data: params
 })
+
+
+export const getArticles = (
+    params: ArticleSearchParams
+): Promise<{
+    data: {
+        articles: Article[],
+        articlesCount: number;
+    }
+}> => {
+    return request({
+        method: 'GET',
+        url: '/articles',
+        params: params
+    })
+}

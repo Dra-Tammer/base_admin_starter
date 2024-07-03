@@ -14,3 +14,27 @@ export interface UserInfo {
     bio: string;
     image: string;
 }
+
+export interface CreateArticle {
+    title: string,
+    description: string,
+    body: string,
+    tagList: string[],
+}
+
+export interface Article extends CreateArticle {
+    slug: string,
+    createdAt: string,
+    updatedAt: string,
+    favorited: boolean,
+    favoritesCount: number,
+    auth: Author,
+}
+
+export interface ArticleSearchParams {
+    tag?: string,
+    author?: string,
+    favorited?: string,
+    offset?: number,
+    limit?: number
+}

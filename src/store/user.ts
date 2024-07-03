@@ -17,6 +17,7 @@ export const useUserStore = defineStore('user', () => {
     const setUser = (user: UserInfo) => {
         userInfo.value = user
         userStorage.set(user.token) // 持久化保存token
+        console.log('isLogin',isLogin)
     };
 
     const verifyAuth = async () => {
