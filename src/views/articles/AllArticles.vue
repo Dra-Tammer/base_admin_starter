@@ -3,7 +3,6 @@ import {ref, onMounted} from "vue";
 import type {Article, ArticleSearchParams} from "@/types";
 import {ElMessageBox} from 'element-plus'
 import {getArticles, getTags} from '@/api'
-import {c} from "vite/dist/node/types.d-aGj9QkWt";
 
 
 interface PageDataInfo {
@@ -124,5 +123,15 @@ fetchArticles(0, info.value.pageSize)
 .pagination {
   margin-left: 30%;
   margin-top: 40px;
+}
+
+.toolBar {
+  margin-top: 20px;
+  margin-left: 40px;
+}
+
+.mainContainer {
+  margin-top: 20px;
+  margin-left: 40px;
 }
 </style>
