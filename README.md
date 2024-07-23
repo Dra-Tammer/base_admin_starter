@@ -33,7 +33,7 @@
 [axios](https://github.com/axios/axios) ,
 [Element-Plus](https://element-plus.org/zh-CN/) ,
 [pinia](https://pinia.vuejs.org/zh/)
-, 提前了解和学习这些知识将大大有助于本项目的使用。
+, 提前了解和学习这些知识将大大有助于本项目的学习与使用。
 
 ## Features
 
