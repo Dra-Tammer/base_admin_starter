@@ -19,8 +19,6 @@
 
 简体中文
 
-<p align="center">DESIGNED BY TAMMER</p>
-
 ## Introduction
 
 **base_admin_starter**
@@ -61,6 +59,3 @@ npm run dev
 
 本项目将自动在 http://localhost:5173 打开
 
-## Developer
-
-`tammer`
